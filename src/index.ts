@@ -44,7 +44,9 @@ export async function processLogs(entries: LogEntry[], dbClient: IDbClient) {
     New records need to be inserted.
   */
   async function processCreation(entry: LogEntry) {
-    
+    const [table, file] = getTableAndFile(entry.source);
+    const query = `DELETE * FROM ${table} WHERE gista_file='${file}';`;
+    await dbClient.execute(query);
   }
 
   for (const entry of entries) {
