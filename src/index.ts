@@ -1,5 +1,27 @@
 import exception from "./exception";
 
+export interface IDbIndex {
+  name: string;
+  columns: {
+    [name: string]: "asc" | "desc";
+  };
+}
+
+export interface IDbColumn {
+  name: string;
+  dataType: string;
+  maxLength: number;
+  nullable: boolean;
+}
+
+export interface IDbTable {
+  name: string;
+  columns: IDbColumn[];
+  indexes: IDbIndex[];
+}
+
+export interface IDbConfig {}
+
 export interface IndexSpecification {}
 
 export interface LogEntry {
@@ -19,6 +41,8 @@ export type FileTypes = "data" | "index";
 export interface IDbClient {
   execute(sql: string): Promise<any>;
 }
+
+export async function initDatabase(dbConfig: IDbConfig, dbClient: IDbClient) {}
 
 export async function processLogs(entries: LogEntry[], dbClient: IDbClient) {
   async function processLog(entry: LogEntry) {
