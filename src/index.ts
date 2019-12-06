@@ -46,19 +46,20 @@ export async function initDatabase(dbConfig: IDbConfig, dbClient: IDbClient) {}
 
 export async function processLogs(entries: LogEntry[], dbClient: IDbClient) {
   async function processLog(entry: LogEntry) {
-    return entry.operation === "created"
+    return entry.operation === "create"
       ? processCreation(entry)
-      : entry.operation === "deleted"
+      : entry.operation === "delete"
       ? processDeletion(entry)
+      : entry.operation === "update"
+      ? processUpdation(entry)
       : exception(
           `Invalid operation ('${entry.operation}') in commit ${entry.commitHash}:${entry.source}.`
         );
   }
-
   /*
-    Delete all records associated with the file.
+    New records need to be inserted.
   */
-  async function processDeletion(entry: LogEntry) {
+  async function processCreation(entry: LogEntry) {
     const [table, file] = getTableAndFile(entry.source);
     const query = `DELETE * FROM ${table} WHERE gista_file='${file}';`;
     await dbClient.execute(query);
@@ -67,7 +68,16 @@ export async function processLogs(entries: LogEntry[], dbClient: IDbClient) {
   /*
     New records need to be inserted.
   */
-  async function processCreation(entry: LogEntry) {
+  async function processUpdation(entry: LogEntry) {
+    const [table, file] = getTableAndFile(entry.source);
+    const query = `DELETE * FROM ${table} WHERE gista_file='${file}';`;
+    await dbClient.execute(query);
+  }
+
+  /*
+    Delete all records associated with the file.
+  */
+  async function processDeletion(entry: LogEntry) {
     const [table, file] = getTableAndFile(entry.source);
     const query = `DELETE * FROM ${table} WHERE gista_file='${file}';`;
     await dbClient.execute(query);
