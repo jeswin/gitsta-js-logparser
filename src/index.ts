@@ -26,7 +26,7 @@ export interface IndexSpecification {}
 
 export interface LogEntry {
   source: string;
-  operation: "created" | "deleted";
+  operation: "created" | "updated" | "deleted";
   data?: string;
   commitHash: string;
   previousHash: string;
