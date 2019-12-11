@@ -1,0 +1,14 @@
+[
+  {
+    "path": "messages/kai/1576105710748.json",
+    "data": {
+      "message": "Alright then"
+    },
+    "operation": "create",
+    "commitHash": "bbbbbb6c97cdede25bfb66cad41cd132a0972992",
+    "branch": "master",
+    "date": "Fri Dec 6 22:38:58 2019 +0530",
+    "message": "New post",
+    "author": "Jeswin <jeswinpk@agilehead.com>"
+  }
+]
