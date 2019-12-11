@@ -1,5 +1,13 @@
 import exception from "./exception";
 
+/*
+  
+  No Foreign Keys
+  ---------------
+  Even though Sqlite allows foreign keys, we are not going to support this.
+  We drop data in tables from time to time (for example during git delete ops); so it doesn't make sense to have foreign keys.
+*/
+
 export interface IDbIndex {
   name: string;
   columns: {
@@ -42,7 +50,9 @@ export interface IDbClient {
   execute(sql: string): Promise<any>;
 }
 
-export async function initDatabase(dbConfig: IDbConfig, dbClient: IDbClient) {}
+export async function initDatabase(dbConfig: IDbConfig, dbClient: IDbClient) {
+  
+}
 
 export async function processLogs(entries: LogEntry[], dbClient: IDbClient) {
   async function processLog(entry: LogEntry) {
