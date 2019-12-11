@@ -1,0 +1,25 @@
+[
+  {
+    "dir": "posts",
+    "fileName": "places.json",
+    "data": [
+      {
+        "index": 0,
+        "title": "Calicut",
+        "content": "The word calico, a fine variety of hand-woven cotton cloth that was exported from the port of Kozhikode, is thought to have been derived from Calicut."
+      },
+      {
+        "index": 1,
+        "title": "Cochin",
+        "content": "Ancient travellers and tradesmen referred to Kochi, variously alluding to it as Cocym, Cochym, Cochin, and Kochi.[36] The Cochin Jewish community called Cochin 'Kogin' (Hebrew: קוגין‎), which is seen in the seal of the synagogue owned by the community[37]. The origin of the name 'Kochi' is thought to be from the Malayalam word kochu azhi, meaning 'small lagoon'."
+      }
+    ],
+    "operation": "create",
+    "commitHash": "6b71da6c97cdede25bfb66cad41cd132a0972992",
+    "previousHash": "0fba772e9c9d732f94aaaf99dd2b7494dfcc0218",
+    "branch": "master",
+    "date": "Fri Dec 6 22:38:58 2019 +0530",
+    "message": "New post",
+    "author": "Jeswin <jeswinpk@agilehead.com>"
+  }
+]

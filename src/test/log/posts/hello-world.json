@@ -1,0 +1,20 @@
+[
+  {
+    "dir": "posts",
+    "fileName": "hello-world.json",
+    "data": [
+      {
+        "index": 0,
+        "title": "Hello World",
+        "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+      }
+    ],
+    "operation": "create",
+    "commitHash": "6b71da6c97cdede25bfb66cad41cd132a0972992",
+    "previousHash": "0fba772e9c9d732f94aaaf99dd2b7494dfcc0218",
+    "branch": "master",
+    "date": "Fri Dec 6 22:38:58 2019 +0530",
+    "message": "New post",
+    "author": "Jeswin <jeswinpk@agilehead.com>"
+  }
+]

@@ -32,17 +32,29 @@ export interface IDbConfig {}
 
 export interface IndexSpecification {}
 
-export interface LogEntry {
-  source: string;
+export interface LogEntryBase {
+  dir: string;
+  file: string;
   operation: "create" | "update" | "delete";
-  data?: string;
   commitHash: string;
   previousHash: string;
-  commitMessage: string;
+  message: string;
   author: string;
-  timestamp: string;
+  time: string;
   branch: string;
 }
+
+export interface EditLogEntry extends LogEntryBase {
+  data: string;
+  index: number;
+  operation: "create" | "update";
+}
+
+export interface DeleteLogEntry extends LogEntryBase {
+  operation: "delete";
+}
+
+export type LogEntry = EditLogEntry | DeleteLogEntry;
 
 export type FileTypes = "data" | "index";
 
@@ -50,9 +62,7 @@ export interface IDbClient {
   execute(sql: string): Promise<any>;
 }
 
-export async function initDatabase(dbConfig: IDbConfig, dbClient: IDbClient) {
-  
-}
+export async function initDatabase(dbConfig: IDbConfig, dbClient: IDbClient) {}
 
 export async function processLogs(entries: LogEntry[], dbClient: IDbClient) {
   async function processLog(entry: LogEntry) {
