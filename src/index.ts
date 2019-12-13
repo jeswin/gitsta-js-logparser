@@ -33,8 +33,7 @@ export interface IDbConfig {}
 export interface IndexSpecification {}
 
 export interface LogEntryBase {
-  dir: string;
-  file: string;
+  path: string;
   operation: "create" | "update" | "delete";
   commitHash: string;
   previousHash: string;

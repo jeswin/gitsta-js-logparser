@@ -1,9 +1,13 @@
-import { LogEntry } from "../..";
+import { LogEntry, IDbClient, EditLogEntry } from "../..";
+import * as crud from "../../crud";
 
-export default async function(entries: LogEntry[]) {
+export default async function(entries: LogEntry[], dbClient: IDbClient) {
   return entries.map(async e => {
+    const [table, ...fileArr] = e.path.split("/");
+    const file = fileArr.join("/");
+
     return e.operation === "create"
-      ? await insert(e, record => ({
+      ? await crud.insert(dbClient, e, record => ({
           title: record.title,
           content: record.content
         }))
@@ -19,4 +23,26 @@ export default async function(entries: LogEntry[]) {
         //   })()
         undefined;
   });
+}
+
+interface IPostRow {
+  title: string;
+  content: string;
+}
+
+export default async function insertPosts(
+  logEntry: EditLogEntry,
+  table: string,
+  fileArr: string[],
+  dbClient: IDbClient
+) {
+  const row = JSON.parse(logEntry.data) as IPostRow;
+  const id = await crud.insert(
+    row,
+    "posts",
+    { commitHash: logEntry.commitHash },
+    dbClient
+  );
+
+  return id;
 }
