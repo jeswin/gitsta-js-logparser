@@ -30,19 +30,31 @@ interface IPostRow {
   content: string;
 }
 
-export default async function insertPosts(
+export async function insertPosts(
   logEntry: EditLogEntry,
   table: string,
   fileArr: string[],
   dbClient: IDbClient
 ) {
   const row = JSON.parse(logEntry.data) as IPostRow;
-  const id = await crud.insert(
-    row,
-    "posts",
-    { commitHash: logEntry.commitHash },
-    dbClient
-  );
+  const id = await crud.insert(row, "posts", dbClient);
+  await crud.updateLastCommit("posts", logEntry.commitHash);
+  return id;
+}
 
+interface ICommentRow {
+  post_id: string;
+  content: string;
+}
+
+export async function insertComments(
+  logEntry: EditLogEntry,
+  table: string,
+  fileArr: string[],
+  dbClient: IDbClient
+) {
+  const row = JSON.parse(logEntry.data) as ICommentRow;
+  const id = await crud.insert(row, "comments", dbClient);
+  await crud.updateLastCommit("comments", logEntry.commitHash);
   return id;
 }

@@ -1,13 +1,8 @@
 import { IDbClient } from ".";
 
-export interface ISaveOptions {
-  commitHash: string;
-}
-
 export async function insert(
   row: any,
   table: string,
-  options: ISaveOptions,
   dbClient: IDbClient
 ) {}
 
